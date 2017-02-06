@@ -7,6 +7,9 @@ import (
 	"io/ioutil"
 	"os/exec"
 	"encoding/json"
+	"path/filepath"
+	"go/build"
+	"bytes"
 )
 
 type Dependencies struct {
@@ -38,6 +41,15 @@ func checkoutRepositoryHash(path string, hash string) error {
 	cmd.Dir = path;
 
 	return cmd.Run();
+}
+
+// 有効なGoPathを取得する
+// GoPathが複数ある場合、先頭のPathを取得する
+func GetGoPath() string {
+	for _, path := range filepath.SplitList(build.Default.GOPATH) {
+		return path;
+	}
+	return "";
 }
 
 func Find(values []os.FileInfo, action func(it os.FileInfo) (bool)) os.FileInfo {
@@ -99,7 +111,7 @@ func findRepository(path string, repo string, dep *Dependencies) {
 
 // 依存ライブラリを列挙する
 func NewDependencies() (Dependencies, error) {
-	GOPATH := os.Getenv("GOPATH");
+	GOPATH := GetGoPath();
 	if len(GOPATH) == 0 {
 		return Dependencies{}, errors.New("GOPATH not set");
 	}
@@ -138,12 +150,14 @@ func (self *Dependencies) ToFile(path string) error {
 	if err != nil {
 		return err;
 	} else {
-		return ioutil.WriteFile(path, buf, os.ModePerm);
+		out := new(bytes.Buffer)
+		json.Indent(out, buf, "", "  ")
+		return ioutil.WriteFile(path, out.Bytes(), os.ModePerm);
 	}
 }
 
 func (self *Dependencies) Restore() error {
-	GOPATH := os.Getenv("GOPATH");
+	GOPATH := GetGoPath();
 	if len(GOPATH) == 0 {
 		return errors.New("GOPATH not set");
 	}
