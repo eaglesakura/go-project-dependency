@@ -1,9 +1,9 @@
 #!/bin/sh
 
 mkdir .gopath
-mkdir .gopath/cygwin
+mkdir .gopath/unix
 
-export GOPATH=`cygpath -w $PWD`\\.gopath\\cygwin
+export GOPATH=$PWD/.gopath/unix
 export CGO_ENABLED=0
 export PROJECT_BUILD_TAGS=""
 

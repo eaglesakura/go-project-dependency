@@ -13,14 +13,3 @@ echo GOROOT=%GOROOT%
 echo GOPATH=%GOPATH%
 go get github.com/stretchr/testify/assert
 go get github.com/urfave/cli
-
-echo ############################
-echo ### prebuilt cgo repo
-echo ############################
-go install github.com/stretchr/testify/assert
-go install github.com/urfave/cli
-
-echo ############################
-echo ### build
-echo ############################
-go build src\main.go
