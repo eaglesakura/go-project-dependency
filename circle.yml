@@ -12,6 +12,7 @@ dependencies:
 test:
   override:
     - go test ./src/...
+    - ./script/circle-build-all.sh
 deployment:
   feature:
     branch: /^feature\/id\/.*$/
