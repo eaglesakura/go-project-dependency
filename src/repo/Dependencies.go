@@ -104,6 +104,7 @@ func NewDependencies() (Dependencies, error) {
 		return Dependencies{}, errors.New("GOPATH not set");
 	}
 
+	fmt.Printf("GOPATH=%s\n", GOPATH);
 	result := Dependencies{};
 	findRepository(string(GOPATH) + "/src", "", &result);
 
@@ -164,6 +165,14 @@ func (self *Dependencies) Restore() error {
 		if err != nil {
 			return err;
 		}
+	}
+
+	// 全てのリポジトリを事前ビルドする
+	for _, repo := range self.Repositories {
+		fmt.Printf("go install %s\n", repo.ImportPath);
+		cmd := exec.Command("go", "install", repo.ImportPath);
+		cmd.Stdout = os.Stdout;
+		cmd.Run();
 	}
 
 	return nil;
