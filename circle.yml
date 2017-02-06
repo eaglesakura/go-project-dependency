@@ -1,0 +1,35 @@
+checkout:
+  post:
+    - chmod 755 ./script/circle-build-all.sh
+machine:
+  timezone:
+    Asia/Tokyo
+dependencies:
+  override:
+    - go version
+    - go get -u github.com/stretchr/testify
+    - go get -u github.com/urfave/cli
+test:
+  override:
+    - go test ./src/...
+deployment:
+  feature:
+    branch: /^feature\/id\/.*$/
+    commands:
+      - cp -r ./ci-release $CIRCLE_ARTIFACTS
+  develop:
+    branch: develop
+    commands:
+      - ./gradlew :app:dependencyUpdates
+      - cp -r ./ci-release $CIRCLE_ARTIFACTS
+  nightly:
+    branch: master
+    commands:
+      - ./gradlew :app:dependencyUpdates
+      - cp -r ./ci-release $CIRCLE_ARTIFACTS
+
+  release:
+    branch: /^v[0-9]\..*$/
+    commands:
+      - ./gradlew :app:dependencyUpdates
+      - cp -r ./ci-release $CIRCLE_ARTIFACTS
