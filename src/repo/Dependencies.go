@@ -153,7 +153,7 @@ func (self *Dependencies) Restore() error {
 	// 全てのリポジトリをgetする
 	for _, repo := range self.Repositories {
 		fmt.Printf("go get %s\n", repo.ImportPath);
-		cmd := exec.Command("go", "get", repo.ImportPath);
+		cmd := exec.Command("go", "get", "-d", repo.ImportPath);
 		cmd.Stdout = os.Stdout;
 		cmd.Run();
 	}
