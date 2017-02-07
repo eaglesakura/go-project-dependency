@@ -8,9 +8,9 @@ dependencies:
   override:
     - go version
     - go get github.com/eaglesakura/prjdep
+    - prjdep restore
 test:
   override:
-    - prjdep restore
     - go test ./...
     - ./script/circle-build-all.sh
 deployment:
