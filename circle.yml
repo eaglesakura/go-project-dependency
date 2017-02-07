@@ -7,10 +7,10 @@ machine:
 dependencies:
   override:
     - go version
-    - go get github.com/stretchr/testify
-    - go get github.com/urfave/cli
+    - go get github.com/eaglesakura/prjdep
 test:
   override:
+    - prjdep restore
     - go test ./...
     - ./script/circle-build-all.sh
 deployment:
