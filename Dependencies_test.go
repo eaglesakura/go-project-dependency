@@ -1,11 +1,11 @@
-package repo
+package main
 
 import (
 	"testing"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDependency(t *testing.T) {
+func TestPrjdepDependency(t *testing.T) {
 	dependencies, error := NewDependencies();
 	assert.NotNil(t, dependencies);
 	assert.Nil(t, error);

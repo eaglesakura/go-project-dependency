@@ -4,6 +4,6 @@ import (
 	"testing"
 )
 
-func TestRunApp(t *testing.T) {
+func TestPrjdepRunApp(t *testing.T) {
 	main();
 }

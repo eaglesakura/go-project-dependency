@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/urfave/cli"
 	"os"
-	"./repo"
 )
 
 func main() {
@@ -30,7 +29,7 @@ const dependenciesFileName = "dependencies.json";
 
 // `prjdep init` コマンドのハンドリングを行なう
 func cmdInit(ctx *cli.Context) error {
-	dependencies, err := repo.NewDependencies();
+	dependencies, err := NewDependencies();
 	if err != nil {
 		return err;
 	}
@@ -40,7 +39,7 @@ func cmdInit(ctx *cli.Context) error {
 
 // `prjdep restore` コマンドのハンドリングを行なう
 func cmdRestore(ctx *cli.Context) error {
-	dependencies, err := repo.NewDependenciesFromFile(dependenciesFileName);
+	dependencies, err := NewDependenciesFromFile(dependenciesFileName);
 	if err != nil {
 		return err;
 	}
