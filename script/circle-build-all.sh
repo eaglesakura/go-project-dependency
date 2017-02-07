@@ -9,7 +9,7 @@ echo "########################"
 export GOOS=linux
 export GOARCH=amd64
 
-go build ./src/prjdep.go
+go build -o prjdep
 mkdir ./ci-release/linux
 mv ./prjdep ./ci-release/linux
 
@@ -19,7 +19,7 @@ echo "########################"
 export GOOS=darwin
 export GOARCH=amd64
 
-go build ./src/prjdep.go
+go build -o prjdep
 mkdir ./ci-release/mac
 mv ./prjdep ./ci-release/mac
 
@@ -29,6 +29,6 @@ echo "########################"
 export GOOS=windows
 export GOARCH=amd64
 
-go build ./src/prjdep.go
+go build -o prjdep.exe
 mkdir ./ci-release/windows
 mv ./prjdep.exe ./ci-release/windows

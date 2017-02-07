@@ -2,11 +2,13 @@
   "Repositories": [
     {
       "ImportPath": "github.com/stretchr/testify",
-      "Rev": "4d4bfba8f1d1027c4fdbe371823030df51419987"
+      "Rev": "4d4bfba8f1d1027c4fdbe371823030df51419987",
+      "Lang": "golang"
     },
     {
       "ImportPath": "github.com/urfave/cli",
-      "Rev": "347a9884a87374d000eec7e6445a34487c1f4a2b"
+      "Rev": "347a9884a87374d000eec7e6445a34487c1f4a2b",
+      "Lang": "golang"
     }
   ]
 }

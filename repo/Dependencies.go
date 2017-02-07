@@ -20,6 +20,7 @@ type Dependencies struct {
 type Repository struct {
 	ImportPath string; // ImportしているライブラリPath "go get ${Import}"
 	Rev        string; // Importしているライブラリのリビジョン "git checkout -f ${Revision}"
+	Lang       string; // 使用する言語情報, "golang"固定
 }
 
 // gitのルートディレクトリである場合true
@@ -96,10 +97,13 @@ func findRepository(path string, repo string, dep *Dependencies) {
 			// rootなので、ここで探索を終わる
 			hash := getRepositoryHash(fullPath);
 			if len(hash) != 0 {
-				fmt.Printf("dependency repo[%s] hash[%s]\n", childRepo, hash);
+				dumpRepo := Repository{
+					ImportPath:childRepo,
+					Rev:hash,
+					Lang:"golang",
+				};
 
-				dumpRepo := Repository{ImportPath:childRepo, Rev:hash};
-
+				fmt.Printf("dependency repo[%s] hash[%s]\n", dumpRepo.ImportPath, dumpRepo.Rev);
 				// リポジトリを追加する
 				dep.Repositories = append(dep.Repositories, dumpRepo);
 			}
@@ -123,7 +127,7 @@ func NewDependencies() (Dependencies, error) {
 	return result, nil;
 }
 
-func FromFile(path string) (Dependencies, error) {
+func NewDependenciesFromFile(path string) (Dependencies, error) {
 	buf, err := ioutil.ReadFile(path);
 	if err != nil {
 		return Dependencies{}, errors.New(fmt.Sprint("FileError[%s]", path));

@@ -16,7 +16,7 @@ func TestDependency(t *testing.T) {
 	assert.Nil(t, dependencies.ToFile("dependencies.json"));
 
 	// ファイルから読み込める
-	load, error := FromFile("dependencies.json");
+	load, error := NewDependenciesFromFile("dependencies.json");
 
 	assert.NotZero(t, len(load.Repositories));
 	assert.Nil(t, error);

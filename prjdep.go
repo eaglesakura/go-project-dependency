@@ -9,7 +9,7 @@ import (
 func main() {
 	app := cli.NewApp();
 	app.Name = "nova";
-	app.Usage = "Golang dependency tool";
+	app.Usage = "Project dependency sync tool";
 	app.Version = "0.0.1";
 	app.Commands = []cli.Command{
 		{
@@ -40,7 +40,7 @@ func cmdInit(ctx *cli.Context) error {
 
 // `prjdep restore` コマンドのハンドリングを行なう
 func cmdRestore(ctx *cli.Context) error {
-	dependencies, err := repo.FromFile(dependenciesFileName);
+	dependencies, err := repo.NewDependenciesFromFile(dependenciesFileName);
 	if err != nil {
 		return err;
 	}

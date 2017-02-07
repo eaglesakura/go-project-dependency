@@ -28,4 +28,4 @@ private/
 out/
 *.exe
 *.db
-src/**/*.json
+/repo/*.json
