@@ -16,8 +16,6 @@ go get github.com/eaglesakura/prjdep
 ```
 cd /path/to/project/dir
 prjdep init
-
-# generate `dependencies.json`
 ```
 
 Generated `dependencies.json` file
@@ -44,8 +42,6 @@ Generated `dependencies.json` file
 ```
 cd /path/to/project/dir
 prjdep restore
-
-# go get -> git checkout -> go install
 ```
 
 ## for Circle.yml
