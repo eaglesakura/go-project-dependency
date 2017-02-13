@@ -38,10 +38,23 @@ func getRepositoryHash(path string) string {
 }
 
 func checkoutRepositoryHash(path string, hash string) error {
-	cmd := exec.Command("git", "checkout", "-f", hash);
-	cmd.Dir = path;
+	// fetch repository
+	{
+		cmd := exec.Command("git", "fetch", "--all", hash);
+		cmd.Dir = path;
+		err := cmd.Run();
+		if err != nil {
+			return err;
+		}
+	}
 
-	return cmd.Run();
+	// checkout revision
+	{
+		cmd := exec.Command("git", "checkout", "-f", hash);
+		cmd.Dir = path;
+
+		return cmd.Run();
+	}
 }
 
 // 有効なGoPathを取得する

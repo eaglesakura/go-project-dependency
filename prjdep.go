@@ -9,7 +9,7 @@ func main() {
 	app := cli.NewApp();
 	app.Name = "prjdep / Project Dependency";
 	app.Usage = "Project dependency sync tool";
-	app.Version = "0.0.1";
+	app.Version = "0.0.2";
 	app.Commands = []cli.Command{
 		{
 			Name:"init",
