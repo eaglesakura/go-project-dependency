@@ -38,21 +38,23 @@ func getRepositoryHash(path string) string {
 }
 
 func checkoutRepositoryHash(path string, hash string) error {
+	// checkout head
+	{
+		cmd := exec.Command("git", "checkout", "-f", "HEAD");
+		cmd.Dir = path;
+		cmd.Run();
+	}
 	// fetch repository
 	{
 		cmd := exec.Command("git", "fetch", "--all", hash);
 		cmd.Dir = path;
-		err := cmd.Run();
-		if err != nil {
-			return err;
-		}
+		cmd.Run();
 	}
 
 	// checkout revision
 	{
 		cmd := exec.Command("git", "checkout", "-f", hash);
 		cmd.Dir = path;
-
 		return cmd.Run();
 	}
 }
