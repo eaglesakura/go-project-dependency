@@ -46,7 +46,7 @@ func checkoutRepositoryHash(path string, hash string) error {
 	}
 	// fetch repository
 	{
-		cmd := exec.Command("git", "fetch", "--all", hash);
+		cmd := exec.Command("git", "fetch", "--all");
 		cmd.Dir = path;
 		cmd.Run();
 	}
